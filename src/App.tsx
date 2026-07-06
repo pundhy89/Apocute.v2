@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   Receipt, Package, Users, BarChart2, Settings, LogOut, Building,
   Wifi, Bluetooth, Sparkles, Clock, ShieldAlert, Heart, RefreshCw, AlertCircle, Stethoscope, MessageSquare,
-  Menu, ChevronDown, Bell, Check
+  Activity, Menu, LayoutDashboard, ChevronDown, Bell, Check
 } from 'lucide-react';
 
 import {
@@ -22,6 +22,8 @@ import SalesSuppliers from './components/SalesSuppliers';
 import Customers from './components/Customers';
 import Doctors from './components/Doctors';
 import Reports from './components/Reports';
+import Dashboard from './components/Dashboard';
+import Transactions from './components/Transactions';
 import SettingsComponent from './components/Settings';
 import WhatsappSettings from './components/WhatsappSettings';
 import CuteLogo from './components/CuteLogo';
@@ -47,7 +49,7 @@ export default function App() {
   const [activeEmployee, setActiveEmployee] = useState<Employee | null>(null);
 
   // 3. Navigation State
-  const [activeTab, setActiveTab] = useState<'pos' | 'inventory' | 'suppliers' | 'customers' | 'doctors' | 'reports' | 'whatsapp' | 'settings'>('pos');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'pos' | 'transactions' | 'inventory' | 'suppliers' | 'customers' | 'doctors' | 'reports' | 'whatsapp' | 'settings'>('pos');
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
   const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
 
@@ -322,7 +324,7 @@ export default function App() {
                 <span className="w-2 h-2 rounded-full bg-[var(--grad-start)] shadow-[0_0_8px_var(--grad-start)] animate-pulse" title="Sistem Aktif" />
               </div>
               <span className="text-[10px] text-purple-500 font-mono tracking-widest uppercase block mt-1 leading-none">
-                Panel: {activeTab === 'pos' ? 'Kasir Kas Utama' : activeTab === 'inventory' ? 'Database Inventori' : activeTab === 'suppliers' ? 'Sales Representative' : activeTab === 'customers' ? 'Loyalty Pelanggan' : activeTab === 'doctors' ? 'Jadwal & Dokter Jaga' : activeTab === 'reports' ? 'Analitis Keuangan' : activeTab === 'whatsapp' ? 'WhatsApp API & Template' : 'Pengaturan Identitas'}
+                Panel: {activeTab === 'dashboard' ? 'Dasbor Utama' : activeTab === 'pos' ? 'Kasir Kas Utama' : activeTab === 'transactions' ? 'Transaksi Keuangan' : activeTab === 'inventory' ? 'Database Inventori' : activeTab === 'suppliers' ? 'Sales Representative' : activeTab === 'customers' ? 'Loyalty Pelanggan' : activeTab === 'doctors' ? 'Jadwal & Dokter Jaga' : activeTab === 'reports' ? 'Analitis Keuangan' : activeTab === 'whatsapp' ? 'WhatsApp API & Template' : 'Pengaturan Identitas'}
               </span>
             </div>
           </button>
@@ -343,6 +345,22 @@ export default function App() {
 
                 {/* Navigation Grid (Compact Icon panel with captions) */}
                 <div className="grid grid-cols-4 gap-3">
+                                    {/* Dashboard */}
+                  <button
+                    onClick={() => {
+                      setActiveTab('dashboard');
+                      setShowMenuDropdown(false);
+                    }}
+                    className={`flex flex-col items-center justify-center p-2 rounded-2xl transition-all text-center gap-2 h-16 cursor-pointer border-transparent ${
+                      activeTab === 'dashboard' ? 'bg-white shadow-3d-input text-[var(--grad-end)]' : 'bg-[var(--color-input-bg)] shadow-3d-button hover:bg-white text-[var(--grad-start)] active:shadow-3d-input'
+                    }`}
+                    title="Dasbor Utama"
+                  >
+                    <span className="flex items-center justify-center">
+                      <LayoutDashboard className="w-5 h-5 drop-shadow-sm" />
+                    </span>
+                    <span className="text-[9px] font-black tracking-tight leading-none line-clamp-1 uppercase">Dasbor</span>
+                  </button>
                   {/* POS */}
                   <button
                     onClick={() => {
@@ -445,8 +463,26 @@ export default function App() {
                     <span className="text-[9px] font-black tracking-tight leading-none line-clamp-1 uppercase">WA API</span>
                   </button>
 
+                                    {activeEmployee.role.toLowerCase() === 'admin' && (
+                    <button
+                      onClick={() => {
+                        setActiveTab('transactions');
+                        setShowMenuDropdown(false);
+                      }}
+                      className={`flex flex-col items-center justify-center p-2 rounded-2xl transition-all text-center gap-2 h-16 cursor-pointer border-transparent ${
+                        activeTab === 'transactions' ? 'bg-white shadow-3d-input text-[var(--grad-end)]' : 'bg-[var(--color-input-bg)] shadow-3d-button hover:bg-white text-[var(--grad-start)] active:shadow-3d-input'
+                      }`}
+                      title="Riwayat Transaksi"
+                    >
+                      <span className="flex items-center justify-center">
+                        <Activity className="w-5 h-5 drop-shadow-sm" />
+                      </span>
+                      <span className="text-[9px] font-black tracking-tight leading-none line-clamp-1 uppercase">Transaksi</span>
+                    </button>
+                  )}
+
                   {/* Reports - Admin Only */}
-                  {activeEmployee.role === 'admin' && (
+                  {activeEmployee.role.toLowerCase() === 'admin' && (
                     <button
                       onClick={() => {
                         setActiveTab('reports');
@@ -524,6 +560,19 @@ export default function App() {
 
         {/* Tab Router Switch */}
         <div className="transition-all duration-300">
+                    {activeTab === 'dashboard' && (
+            <Dashboard
+              medicines={medicines}
+              customers={customers}
+              salesHistory={salesHistory}
+              doctors={doctors}
+              activeEmployee={activeEmployee!}
+              settings={settings}
+              setActiveTab={setActiveTab}
+              theme={settings.theme}
+            />
+          )}
+
           {activeTab === 'pos' && (
             <POS
               medicines={medicines}
@@ -583,6 +632,14 @@ export default function App() {
               onDeleteDoctor={deleteDoctor}
               settings={settings}
               theme={settings.theme}
+            />
+          )}
+
+          {activeTab === 'transactions' && (
+            <Transactions
+              salesHistory={salesHistory}
+              theme={settings.theme}
+              settings={settings}
             />
           )}
 

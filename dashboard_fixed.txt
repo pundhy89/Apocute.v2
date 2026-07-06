@@ -1,0 +1,4 @@
+I have successfully restored the main Dashboard view and ensured that both "Dasbor" (Dashboard) and "Transaksi" (Transactions) are accessible in the dropdown panel navigation.
+
+- **Dashboard Restoration**: The central Dashboard module has been fully reinstated. It includes visual updates fitting the new 3D Neumorphic design language, featuring floating `shadow-3d-card` and `shadow-3d-input` elements that adapt perfectly to the user's active theme.
+- **Navigation Layout Updates**: The navigation panel has been restructured to cleanly accommodate both the Dashboard and the restored Transactions pages. Cashiers will now be able to access the central Dashboard again, while Transactions remain securely visible only to Admins.
