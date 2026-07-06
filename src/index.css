@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fredoka", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root, .theme-lavender {
+  --text-primary: #581c87;
+  --text-secondary: #9333ea;
+  --text-muted: #c084fc;
+  --color-bg-light: #ffffff;
+  --color-card-bg: #f0e6fa;
+  --color-input-bg: #f7effc;
+  --shadow-dark: #c5b4e3;
+  --shadow-light: #ffffff;
+  --shadow-input-dark: #d4c5f0;
+  
+  --grad-start: #9333ea;
+  --grad-end: #db2777;
+  --bg-grad-start: #a855f7;
+  --bg-grad-end: #ec4899;
+  --shadow-grad: rgba(236, 72, 153, 0.4);
+  --bg-app-1: #f3e8ff;
+  --bg-app-2: #e9d5ff;
+  --bg-app-3: #d8b4fe;
+}
+
+.theme-minty {
+  --text-primary: #064e3b;
+  --text-secondary: #059669;
+  --text-muted: #34d399;
+  --color-bg-light: #ffffff;
+  --color-card-bg: #e6fcf5;
+  --color-input-bg: #f0fdf9;
+  --shadow-dark: #b8e6d3;
+  --shadow-light: #ffffff;
+  --shadow-input-dark: #cbf0e1;
+
+  --grad-start: #10b981;
+  --grad-end: #0ea5e9;
+  --bg-grad-start: #34d399;
+  --bg-grad-end: #38bdf8;
+  --shadow-grad: rgba(16, 185, 129, 0.4);
+  --bg-app-1: #d1fae5;
+  --bg-app-2: #a7f3d0;
+  --bg-app-3: #6ee7b7;
+}
+
+.theme-ocean {
+  --text-primary: #0c4a6e;
+  --text-secondary: #0284c7;
+  --text-muted: #38bdf8;
+  --color-bg-light: #ffffff;
+  --color-card-bg: #e0f2fe;
+  --color-input-bg: #f0f9ff;
+  --shadow-dark: #b6def7;
+  --shadow-light: #ffffff;
+  --shadow-input-dark: #cbe9fa;
+  --grad-start: #0284c7;
+  --grad-end: #4f46e5;
+  --bg-grad-start: #38bdf8;
+  --bg-grad-end: #818cf8;
+  --shadow-grad: rgba(2, 132, 199, 0.4);
+  --bg-app-1: #e0f2fe;
+  --bg-app-2: #bae6fd;
+  --bg-app-3: #7dd3fc;
+}
+
+.theme-sunset {
+  --text-primary: #7c2d12;
+  --text-secondary: #ea580c;
+  --text-muted: #fb923c;
+  --color-bg-light: #ffffff;
+  --color-card-bg: #ffedd5;
+  --color-input-bg: #fff7ed;
+  --shadow-dark: #fad1a5;
+  --shadow-light: #ffffff;
+  --shadow-input-dark: #fce3c7;
+  --grad-start: #ea580c;
+  --grad-end: #e11d48;
+  --bg-grad-start: #fb923c;
+  --bg-grad-end: #fb7185;
+  --shadow-grad: rgba(234, 88, 12, 0.4);
+  --bg-app-1: #ffedd5;
+  --bg-app-2: #fed7aa;
+  --bg-app-3: #fdba74;
+}
+
+.theme-cherry {
+  --text-primary: #881337;
+  --text-secondary: #e11d48;
+  --text-muted: #fb7185;
+  --color-bg-light: #ffffff;
+  --color-card-bg: #ffe4e6;
+  --color-input-bg: #fff1f2;
+  --shadow-dark: #f8b4bc;
+  --shadow-light: #ffffff;
+  --shadow-input-dark: #facfd5;
+  --grad-start: #e11d48;
+  --grad-end: #9333ea;
+  --bg-grad-start: #fb7185;
+  --bg-grad-end: #c084fc;
+  --shadow-grad: rgba(225, 29, 72, 0.4);
+  --bg-app-1: #ffe4e6;
+  --bg-app-2: #fecdd3;
+  --bg-app-3: #fda4af;
+}
+
+/* 3D Neumorphic Utilities based on user image */
+@layer utilities {
+  .bg-3d-app {
+    background: radial-gradient(circle at top left, var(--bg-app-1) 0%, var(--bg-app-2) 50%, var(--bg-app-3) 100%);
+  }
+  .shadow-3d-card {
+    box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+    background: linear-gradient(145deg, var(--color-bg-light), var(--color-card-bg));
+  }
+  .shadow-3d-button {
+    box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+    background: var(--color-input-bg);
+  }
+  .shadow-3d-button:active {
+    box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+  }
+  .shadow-3d-input {
+    box-shadow: inset 5px 5px 10px var(--shadow-input-dark), inset -5px -5px 10px var(--shadow-light);
+    background: var(--color-input-bg);
+  }
+  .shadow-3d-icon {
+    box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+    background: var(--color-bg-light);
+  }
+  .text-3d-gradient {
+    background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bg-3d-gradient {
+    background: linear-gradient(135deg, var(--bg-grad-start), var(--bg-grad-end));
+  }
+  .shadow-3d-gradient {
+    box-shadow: 0 10px 20px -5px var(--shadow-grad);
+  }
+}
+
+/* Custom scrollbar to keep it neat and clean */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Printing styling */
+@media print {
+  body {
+    background: white;
+    color: black;
+    font-size: 10px;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}

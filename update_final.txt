@@ -1,0 +1,5 @@
+I have fully unified the Doctors and WhatsApp API modules into the 3D Neumorphic visual system, and mapped all text colors to dynamically match the selected theme. Here is the summary of the enhancements:
+
+- **Immersive 3D Modals & Cards**: All elements in the Doctors and WhatsApp settings panels, including forms, schedule cards, and template editors, now use the elevated `shadow-3d-card` and `shadow-3d-input` styles with adaptive theme backgrounds.
+- **Dynamic Text Colors**: Added new CSS variables (`--text-primary`, `--text-secondary`, `--text-muted`) to the global theme definitions. Text in these modules will now shift its hue perfectly (e.g., deep emerald in Minty, rich purple in Lavender, warm crimson in Cherry) instead of relying on standard grayscale colors.
+- **Refined Action Buttons**: Action toggles and submit buttons in both modules have been updated to use the floating `shadow-3d-button` styling with theme-matching gradient text and hover interactions.

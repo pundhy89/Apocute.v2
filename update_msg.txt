@@ -1,0 +1,6 @@
+I have updated the theme settings and the UI to fully support 3D themes across the app. Here's a summary of the changes:
+
+- **Global 3D Theme Variables**: Replaced hardcoded CSS colors with dynamic CSS variables (`--color-card-bg`, `--shadow-dark`, etc.) in `index.css`. This ensures that all UI elements, including 3D shadows and app backgrounds, dynamically shift their hue to match the chosen theme (Lavender, Minty, Ocean, Sunset, Cherry).
+- **Notification Popup (Top Right)**: Updated the `showNotificationDropdown` center popup and dropdown to use `shadow-3d-card` and `shadow-3d-button` styling. The popup's colors, borders, and shadows now react seamlessly to the active theme.
+- **Floating Search & Barcode Bar (Bottom)**: Upgraded the bottom sticky search bar in the POS module. The container now has a 3D glassmorphic card shadow (`shadow-3d-card`), while the search input and barcode scanner button use inset and outset 3D shadows (`shadow-3d-input`, `shadow-3d-button`) that match the global theme hues.
+- **Holistic Color Consistency**: Replaced various hardcoded purple and pink text/background colors (`#f0e6fa`, `#f7effc`) with their respective CSS variables across the application, ensuring that active states and icons match the exact gradient and nuance of the selected theme.
